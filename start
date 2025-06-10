@@ -42,14 +42,14 @@ else
     echo "pip3 sudah terinstal"
 fi
 
-if [ ! -d "/root/DigitalOcean-TeleBot" ]; then
-    git clone https://github.com/FighterTunnel/DigitalOcean-TeleBot.git
+if [ ! -d "/root/tele" ]; then
+    git clone https://github.com/NavitaBurhan/tele.git
 else
     echo "Repository sudah ada"
 fi
 
-if [ -f "/root/DigitalOcean-TeleBot/requirements.txt" ]; then
-    pip3 install -r /root/DigitalOcean-TeleBot/requirements.txt
+if [ -f "/root/tele/requirements.txt" ]; then
+    pip3 install -r /root/tele/requirements.txt
 else
     echo "File requirements.txt tidak ditemukan"
 fi
@@ -57,11 +57,11 @@ fi
 
 SERVICE_NAME="do"
 SERVICE_FILE="/etc/systemd/system/$SERVICE_NAME.service"
-if [ -f "/root/DigitalOcean-TeleBot/config.json" ]; then
-    rm /root/DigitalOcean-TeleBot/config.json
+if [ -f "/root/tele/config.json" ]; then
+    rm /root/tele/config.json
 fi
 
-cat <<EOT > /root/DigitalOcean-TeleBot/config.json
+cat <<EOT > /root/tele/config.json
 {
   "BOT": {
     "NAME": "$nama_store",
@@ -76,8 +76,8 @@ Description=My Python Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /root/DigitalOcean-TeleBot/main.py
-WorkingDirectory=/root/DigitalOcean-TeleBot
+ExecStart=/usr/bin/python3 /root/tele/main.py
+WorkingDirectory=/root/tele
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
